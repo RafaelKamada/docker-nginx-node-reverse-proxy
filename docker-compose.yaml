@@ -9,6 +9,8 @@ services:
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s  docker-entrypoint.sh node index.js
     hostname: node
     tty: true
+    volumes:
+      - ./node:/src/usr/app
     ports:
       - "3000:3000"
     depends_on:
@@ -36,7 +38,7 @@ services:
     restart: always 
     tty: true
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
