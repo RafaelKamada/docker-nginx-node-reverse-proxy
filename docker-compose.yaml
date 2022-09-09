@@ -15,8 +15,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    networks:
-      - node-nginx-network
 
   nginx:
     build:
@@ -28,8 +26,6 @@ services:
       - "8080:80"
     depends_on:
       - node
-    networks:
-      - node-nginx-network
 
   db:
     image: mysql:5.7
@@ -42,9 +38,3 @@ services:
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
-    networks:
-      - node-nginx-network
-
-networks:
-  node-nginx-network:
-    external: true
